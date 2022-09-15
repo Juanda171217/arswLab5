@@ -1,0 +1,6 @@
+-Qué condiciones de carrera se podrían presentar?
+RTA: Las condiciones de carrera que se tendrían serían las mismas que suceden en las transacciones, si se utiliza un recurso de manera simultánea, se podrían llegar a crear 2 instancias del mismo en el momento de acceder, es decir, si una persona llegase a modificar un blueprint mientras que otra también, solo queda el registro del último que realizo la modificación por lo que nunca existirán los cambios del primero, o si alguien consulta en ese momento va a tener una consulta previa a los cambios.
+-Cuales son las respectivas regiones críticas?
+RTA: Las respectivas regiones críticas son aquellas que su funcionalidad se ve limitada mediante las peticiones HTTP y en nuestro caso, la región critica es el hashMap ya que este no es bloqueado o sincronizado mientras se interactúa con él.
+-Ajuste el código para suprimir las condiciones de carrera. Tengan en cuenta que simplemente sincronizar el acceso a las operaciones de persistencia/consulta DEGRADARÁ SIGNIFICATIVAMENTE el desempeño de API, por lo cual se deben buscar estrategias alternativas.
+RTA: Lo que se hizo fue usar un ConcurrentHashMap de la librería de java, el cual se encarga de que este no sea más una región critica regulando el acceso a el recurso de forma ordenada tal como se requiere para suprimir la condición carrera.
