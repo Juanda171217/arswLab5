@@ -1,6 +1,7 @@
 ### Escuela Colombiana de Ingeniería
 
 ### Arquitecturas de Software
+#### Santiago Fetecua - Juan David Martinez
 
 
 
